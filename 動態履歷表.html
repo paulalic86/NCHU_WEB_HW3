@@ -1,0 +1,128 @@
+﻿<!DOCTYPE html>
+<html>
+ <head>
+    <meta charset="utf-8">
+    <title>Document</title>
+    <h2>動態履歷表</h2>
+    <script>
+     function show() {
+    var resumeForm = document.forms['form1'];
+    var name = resumeForm['username'].value;
+    var birthday = resumeForm['userbd'].value;
+    var gender = resumeForm['sex'].value;
+    var note = resumeForm['userph'].value;
+    var hobby = resumeForm['hobby'].value;
+
+    if (name == "" || birthday == "") {
+        alert("Name and birthday must be filled");
+        return false;
+    }
+
+    clearTable();
+    appearTable(name, birthday, gender, hobby, note);
+}
+
+
+/*
+ * 檢查Table是否為空白，若無則清除Table
+ */
+function clearTable() {
+    var tableNode = document.getElementById("TABLE");
+    //判斷TABLE標籤是否產生
+    if( tableNode != null){
+        while(tableNode.firstChild){
+            tableNode.removeChild(tableNode.firstChild);
+        }
+    }
+}
+
+
+/*
+ * 獲得資料後顯示於Table
+ */
+function appearTable(name, birthday, gender, hobby, note) {
+    var tableNode = document.getElementById("form1");
+    //判斷TABLE是否建立
+   if(!document.getElementById("TABLE")){
+    var table = document.createElement("TABLE");
+    //為了方便clearTable function找到table
+    table.id = "TABLE";
+   }
+   else{
+    var table = document.getElementById("TABLE")
+   }
+    var tableArray = [
+        ["Name", name],
+        ["Birthday", birthday],
+        ["Gender", gender],
+        ["Hobby", hobby],
+        ["Note", note]
+    ];
+    tableNode.appendChild(table);
+
+    for (i = 0; i < 5; i++) {
+        var tr = document.createElement("TR");
+        table.appendChild(tr);
+        var th = document.createElement("TH");
+        var td = document.createElement("TD");
+        tr.appendChild(th);
+        tr.appendChild(td);
+        th.appendChild(document.createTextNode(tableArray[i][0]));
+        td.appendChild(document.createTextNode(tableArray[i][1]));
+				setAttributes(th, {
+					"class": "defaultTH",
+					"onmouseover": "this.className='mouseoverTH'",
+					"onmouseout": "this.className='defaultTH'"
+				})
+        setAttributes(td, {
+            "class": "defaultTD",
+            "onmouseover": "this.className='mouseoverTD'",
+            "onmouseout": "this.className='defaultTD'"
+        });
+    }
+}
+
+
+/*
+ * 多個屬性同時讀取
+ */
+function setAttributes(element, attributes) {
+    for (var attribute in attributes) {
+        element.setAttribute(attribute, attributes[attribute]);
+    }
+}
+    </script>
+	<style>
+		table, th, td {
+		   border: 1px solid black;
+		   text-align: center;
+		}
+		input:invalid {
+			border: 1px solid red;
+		}
+		input:valid {
+			border: 1px solid green;
+		}
+		</style>
+</head>
+
+<body>
+  <form name="form1" id="form1">
+        姓名
+        <input type="text" name="username" required><br>
+        生日
+        <input type="date" name="userbd" required id="bd"><br>
+        性別
+        <input type="text" name="sex" required><br>
+        興趣
+        <input type="text" name="hobby" ><br>
+        自傳
+        <br>
+        <textarea cols=60 rows=6 name="userph" required>輸入文字 </textarea>
+        <br>
+        <input type="button" value="送出" onclick="show()">
+  </form>
+
+</body>
+
+</html>
