@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <center><title>Dynamic Form</title>
+    <h1><font>動態履歷表</font></h1>
+    <script src="./index.js"></script>
+    <link rel="stylesheet" href="./main.css">
+</head>
+<body background = "https://s-media-cache-ak0.pinimg.com/originals/43/e9/2e/43e92e40839e36ad3dbee2c69dbe5731.jpg">
+	<div class = "b">
+    <form id="form" name="form">
+        姓名：<input type="text" name="Name"><br><br>
+        生日：<input type="date" name="Birthday"><br><br>
+        性別：<input type="radio" name="Sex">男生
+			<input type="radio" name="Sex">女生
+			<input type="radio" name="Sex">都可以<br><br>
+        興趣：<input type="text" name="Hobby"><br><br>
+        自傳：<textarea Cols="20" Rows="5" name="AboutMyself" Wrap="Soft"></textarea><br><br>
+        <input type="button" value="資料送出" onclick="createTable()"><br><br>
+    </form>
+    </div>
+</body>
+</html>
